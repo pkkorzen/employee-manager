@@ -1,17 +1,17 @@
 package employee.dao;
 
 import employee.entities.Employee;
+import employee.utils.EntityManagerUtil;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 import java.util.List;
 
 public class EmployeeDaoImpl implements EmployeeDao{
-    EntityManager entityManager = Persistence.createEntityManagerFactory("sqlite3").createEntityManager();
 
     @Override
     public Employee getEmployeeById(int id) {
+        EntityManager entityManager = EntityManagerUtil.getEntityManager();
         Query query = entityManager.createQuery("from Employee where id=?1");
         query.setParameter(1, id);
         Employee employee = (Employee)query.getSingleResult();
@@ -22,6 +22,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
     @Override
     public List<Employee> getEmployees() {
+        EntityManager entityManager = EntityManagerUtil.getEntityManager();
         Query query = entityManager.createQuery("from Employee");
         List<Employee> employees = query.getResultList();
         entityManager.getEntityManagerFactory().close();
@@ -31,6 +32,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
     @Override
     public void addEmployee(Employee employee) {
+        EntityManager entityManager = EntityManagerUtil.getEntityManager();
         entityManager.getTransaction().begin();
         Employee employee1 = new Employee();
         employee1.setName(employee.getName());
@@ -43,6 +45,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
     @Override
     public void editEmployee(Employee employee) {
+        EntityManager entityManager = EntityManagerUtil.getEntityManager();
         entityManager.getTransaction().begin();
         Query query = entityManager.createQuery("update Employee set name=:name, salary=:salary where id=:id");
         query.setParameter("name", employee.getName());
@@ -56,6 +59,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
     @Override
     public void removeEmployee(int id) {
+        EntityManager entityManager = EntityManagerUtil.getEntityManager();
         entityManager.getTransaction().begin();
         Query query = entityManager.createQuery("delete from Employee where id=?1");
         query.setParameter(1, id);
