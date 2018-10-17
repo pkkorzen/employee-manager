@@ -15,27 +15,15 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Employees App</a>
+            <a class="navbar-brand" href="#">Employee App</a>
         </div>
         <ul class="nav navbar-nav">
-            <c:choose>
-            <c:when test="${param.activeTab == 'home'}">
-            <li class="active">
-                </c:when>
-                <c:otherwise>
-            <li>
-                </c:otherwise>
-                </c:choose>
-                <a href="/">Home</a></li>
+            <li><a href="/">Home</a></li>
 
-            <c:choose>
-            <c:when test="${param.activeTab == 'employees'}">
-            <li class="active">
-                </c:when>
-                <c:otherwise>
-            <li>
-                </c:otherwise>
-                </c:choose>
+            <li <c:if test="${param.activeTab == 'employees'}">
+                class="active"
+            </c:if>
+            >
                 <a href="/employees">Employees Page</a>
             </li>
 
@@ -48,6 +36,26 @@
                 </c:otherwise>
                 </c:choose>
                 <a href="/employee/add">Add Employee</a>
+            </li>
+            <c:choose>
+            <c:when test="${param.activeTab == 'positions'}">
+            <li class="active">
+                </c:when>
+                <c:otherwise>
+            <li>
+                </c:otherwise>
+                </c:choose>
+                <a href="/positions">Positions</a>
+            </li>
+            <c:choose>
+            <c:when test="${param.activeTab == 'position'}">
+            <li class="active">
+                </c:when>
+                <c:otherwise>
+            <li>
+                </c:otherwise>
+                </c:choose>
+                <a href="/position/add">Add Position</a>
             </li>
         </ul>
     </div>
