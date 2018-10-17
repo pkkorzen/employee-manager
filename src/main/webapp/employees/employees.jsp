@@ -14,7 +14,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <html>
 <head>
-    <title>Employees</title>
+    <title>Title</title>
 </head>
 <body>
 <div class="container">
@@ -29,7 +29,7 @@
             <th>Name</th>
             <th>Surname</th>
             <th>Salary</th>
-            <th></th>
+            <th>Position</th>
             <th></th>
         </tr>
         </thead>
@@ -40,6 +40,7 @@
                 <td>${employee.name}</td>
                 <td>${employee.surname}</td>
                 <td>${employee.salary}</td>
+                <td>${employee.positionName}</td>
                 <td><a href="/employee?id=${employee.id}">Edit</a></td>
                 <td><a href="/employee/delete?id=${employee.id}">Delete</a></td>
             </tr>

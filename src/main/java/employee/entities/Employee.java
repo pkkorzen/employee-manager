@@ -6,15 +6,24 @@ import javax.persistence.*;
 @Table(name="employees")
 public class Employee {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
     @Column(name="id")
     private int id;
     @Column(name="name")
     private String name;
     @Column(name="surname")
     private String surname;
-    @Column(name="salary")
-    private int salary;
+    @ManyToOne
+    @JoinColumn(name = "position_id")
+    private Position position;
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
 
     public int getId() {
         return id;
@@ -40,11 +49,4 @@ public class Employee {
         this.surname = surname;
     }
 
-    public int getSalary() {
-        return salary;
-    }
-
-    public void setSalary(int salary) {
-        this.salary = salary;
-    }
 }
