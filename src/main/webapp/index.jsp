@@ -16,7 +16,7 @@
   <jsp:include page="./employees/menu.jsp">
     <jsp:param name="activeTab" value="home"/>
   </jsp:include>
-  <h2>Employees App</h2>
+  <h2>Employee App</h2>
 </div>
 </body>
 </html>

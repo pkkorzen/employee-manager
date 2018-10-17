@@ -12,8 +12,8 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void shouldFindEmployeeById() {
-        EmployeeDto employeeDto = employeeService.getEmployeeById(1);
-        assertEquals("jan", employeeDto.getName());
+        EmployeeDto employeeDto = employeeService.getEmployeeById(52);
+        assertEquals("Jan", employeeDto.getName());
     }
 
     @Test
@@ -24,10 +24,10 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void shouldUpdateEmployee() {
-        EmployeeDto employeeDto = employeeService.getEmployeeById(1);
+        EmployeeDto employeeDto = employeeService.getEmployeeById(52);
         employeeDto.setSurname("Burda");
         employeeService.saveEmployee(employeeDto);
-        assertEquals("Burda", employeeService.getEmployeeById(1).getSurname());
+        assertEquals("Burda", employeeService.getEmployeeById(52).getSurname());
     }
 
     @Test
