@@ -1,8 +1,7 @@
 package employee.controllers;
 
-import employee.services.EmployeeService;
 import employee.services.EmployeeServiceImpl;
-
+import employee.services.EmployeeService;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +13,9 @@ import java.io.IOException;
 public class EmployeeDeleteController extends HttpServlet {
 
     private EmployeeService employeeService = new EmployeeServiceImpl();
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");

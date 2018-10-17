@@ -1,9 +1,8 @@
 package employee.controllers;
 
-import employee.entities.Employee;
-import employee.services.EmployeeService;
+import employee.dto.EmployeeDto;
 import employee.services.EmployeeServiceImpl;
-
+import employee.services.EmployeeService;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,9 +16,12 @@ import java.util.List;
 public class EmployeesController extends HttpServlet {
 
     private EmployeeService employeeService = new EmployeeServiceImpl();
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Employee> employees = employeeService.getEmployees();
+        List<EmployeeDto> employees = employeeService.getEmployees();
 
         request.setAttribute("employees", employees);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/employees/employees.jsp");

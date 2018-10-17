@@ -1,8 +1,11 @@
 package employee.controllers;
 
-import employee.entities.Employee;
-import employee.services.EmployeeService;
+import employee.dto.EmployeeDto;
+import employee.entities.Position;
 import employee.services.EmployeeServiceImpl;
+import employee.services.EmployeeService;
+import employee.services.PositionService;
+import employee.services.PositionServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,30 +16,27 @@ import java.io.IOException;
 
 @WebServlet(name = "EmployeeSaveController", value="/employee/save")
 public class EmployeeSaveController extends HttpServlet {
+
     private EmployeeService employeeService = new EmployeeServiceImpl();
+    private PositionService positionService = new PositionServiceImpl();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
         String name = request.getParameter("name");
         String surname = request.getParameter("surname");
-        String salary = request.getParameter("salary");
-        Employee employee = new Employee();
-        employee.setName(name);
-        employee.setSurname(surname);
-
-        if(!salary.equals("")){
-            int employeeSalary = 0;
-            try {
-                employeeSalary = Integer.parseInt(salary);
-            } catch (NumberFormatException ex) {
-                System.out.println("Employee id should be int value ");
-            }
-            employee.setSalary(employeeSalary);
-        }
+        String positionName = request.getParameter("positionName");
+        Position position = positionService.getPositionByName(positionName);
+        EmployeeDto employeeDto = new EmployeeDto();
+        employeeDto.setName(name);
+        employeeDto.setSurname(surname);
+        employeeDto.setPositionName(positionName);
+        employeeDto.setSalary(position.getSalary());
+        employeeDto.setPositionId(position.getPositionId());
 
         if(!id.equals("")){
-            employee.setId(Integer.parseInt(id));
+            employeeDto.setId(Integer.parseInt(id));
         }
-        employeeService.saveEmployee(employee);
+
+        employeeService.saveEmployee(employeeDto);
         response.sendRedirect("/employees");
     }
 
